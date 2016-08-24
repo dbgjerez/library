@@ -5,6 +5,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -28,13 +29,18 @@ public class BookController {
 		return bookservice.findAll();
 	}
 
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	public BookDTO findOne(@PathVariable("id") Integer id) {
+		log.debug(String.format("Buscando libro con id %s", id));
+		return bookservice.findById(id);
+	}
+
 	@RequestMapping(method = { RequestMethod.POST })
 	public BookDTO create(@RequestBody BookDTO book) {
 		log.debug(String.format("Vamos a crear el libro siguiente: %s", book));
 		return bookservice.create(book);
 	}
 
-	// TODO: Recuperar uno
 	// TODO: Modificar
 	// TODO: Borrar
 
