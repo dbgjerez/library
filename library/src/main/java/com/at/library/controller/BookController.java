@@ -41,7 +41,12 @@ public class BookController {
 		return bookservice.create(book);
 	}
 
-	// TODO: Modificar
+	@RequestMapping(value = "/{id}", method = { RequestMethod.PUT })
+	public void update(@PathVariable("id") Integer id, @RequestBody BookDTO book) {
+		log.debug(String.format("Vamos a modificar el libro: %s", book));
+		bookservice.update(book);
+	}
+
 	// TODO: Borrar
 
 }
