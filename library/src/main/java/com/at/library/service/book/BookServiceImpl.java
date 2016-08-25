@@ -1,7 +1,6 @@
 package com.at.library.service.book;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import org.dozer.DozerBeanMapper;
@@ -24,13 +23,11 @@ public class BookServiceImpl implements BookService {
 	@Override
 	public List<BookDTO> findAll() {
 		final Iterable<Book> findAll = bookDao.findAll();
-		final Iterator<Book> iterator = findAll.iterator();
 		final List<BookDTO> res = new ArrayList<>();
-		while (iterator.hasNext()) {
-			final Book b = iterator.next();
+		findAll.forEach(b -> {
 			final BookDTO bDTO = transform(b);
 			res.add(bDTO);
-		}
+		});
 		return res;
 	}
 
@@ -42,6 +39,29 @@ public class BookServiceImpl implements BookService {
 	@Override
 	public Book transform(BookDTO book) {
 		return dozer.map(book, Book.class);
+	}
+
+	@Override
+	public BookDTO findById(Integer id) {
+		final Book b = bookDao.findOne(id);
+		return transform(b);
+	}
+
+	@Override
+	public BookDTO create(BookDTO bookDTO) {
+		final Book book = transform(bookDTO);
+		return transform(bookDao.save(book));
+	}
+
+	@Override
+	public void update(BookDTO bookDTO) {
+		final Book book = transform(bookDTO);
+		bookDao.save(book);
+	}
+
+	@Override
+	public void delete(Integer id) {
+		bookDao.delete(id);
 	}
 
 }
