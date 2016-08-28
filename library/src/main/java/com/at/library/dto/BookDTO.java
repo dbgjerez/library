@@ -12,6 +12,18 @@ public class BookDTO extends DTO {
 
 	private String author;
 
+	public BookDTO(Integer id, String isbn, String title, String author) {
+		super();
+		this.id = id;
+		this.isbn = isbn;
+		this.title = title;
+		this.author = author;
+	}
+
+	public BookDTO() {
+		super();
+	}
+
 	public Integer getId() {
 		return id;
 	}
