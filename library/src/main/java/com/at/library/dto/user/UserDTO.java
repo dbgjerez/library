@@ -6,6 +6,15 @@ public class UserDTO extends UserPostDTO {
 
 	protected Integer id;
 
+	public UserDTO() {
+		super();
+	}
+
+	public UserDTO(Integer id, String dni, String name) {
+		super(dni, name);
+		this.id = id;
+	}
+
 	public Integer getId() {
 		return id;
 	}

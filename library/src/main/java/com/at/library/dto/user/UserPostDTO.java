@@ -10,6 +10,16 @@ public class UserPostDTO extends DTO {
 
 	protected String name;
 
+	public UserPostDTO(String dni, String name) {
+		super();
+		this.dni = dni;
+		this.name = name;
+	}
+
+	public UserPostDTO() {
+		super();
+	}
+
 	public String getDni() {
 		return dni;
 	}
