@@ -18,6 +18,7 @@ import com.at.library.model.User;
 public class UserServiceImpl implements UserService {
 
 	private static final String EMPTY = "";
+	private static final String LIKE = "%";
 
 	@Autowired
 	private UserDao userDao;
@@ -27,7 +28,14 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public List<UserDTO> findAll(final String name, final String dni) {
-		return userDao.findByNameAndDni(name, dni);
+		return userDao.findByNameAndDni(likeParam(name), likeParam(dni));
+	}
+
+	private String likeParam(String param) {
+		if (param != null) {
+			return LIKE.concat(param).concat(LIKE);
+		}
+		return param;
 	}
 
 	@Override
