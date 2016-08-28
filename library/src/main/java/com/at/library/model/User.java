@@ -24,13 +24,10 @@ public class User implements Serializable {
 
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date deleted;
-	
+
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date createdAt;
 
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date updatedAt;
-	
 	public Integer getId() {
 		return id;
 	}
@@ -69,14 +66,6 @@ public class User implements Serializable {
 
 	public void setCreatedAt(Date createdAt) {
 		this.createdAt = createdAt;
-	}
-
-	public Date getUpdatedAt() {
-		return updatedAt;
-	}
-
-	public void setUpdatedAt(Date updatedAt) {
-		this.updatedAt = updatedAt;
 	}
 
 }
