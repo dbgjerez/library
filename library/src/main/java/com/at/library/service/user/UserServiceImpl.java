@@ -1,6 +1,7 @@
 package com.at.library.service.user;
 
 import java.util.Date;
+import java.util.List;
 
 import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,10 +25,17 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private DozerBeanMapper mapper;
 
+	@Override
+	public List<UserDTO> findAll(final String name, final String dni) {
+		return userDao.findByNameAndDni(name, dni);
+	}
+
+	@Override
 	public UserDTO findUserDTOById(Integer id) throws UserNotFoundException {
 		return transform(findUserById(id));
 	}
 
+	@Override
 	public User findUserById(Integer id) throws UserNotFoundException {
 		final User user = userDao.findOne(id);
 		if (user != null && user.getDeleted() == null) {
@@ -36,6 +44,7 @@ public class UserServiceImpl implements UserService {
 		throw new UserNotFoundException();
 	}
 
+	@Override
 	public UserDTO create(UserPostDTO u) throws InvalidDataException {
 		if (validate(u)) {
 			final User user = transform(u);
@@ -45,16 +54,19 @@ public class UserServiceImpl implements UserService {
 		throw new InvalidDataException("Los datos del usuario no son correctos");
 	}
 
+	@Override
 	public void delete(Integer id) throws UserNotFoundException {
 		final User u = findUserById(id);
 		u.setDeleted(new Date());
 		userDao.save(u);
 	}
 
+	@Override
 	public User transform(UserPostDTO u) {
 		return mapper.map(u, User.class);
 	}
 
+	@Override
 	public UserDTO transform(User u) {
 		return mapper.map(u, UserDTO.class);
 	}
