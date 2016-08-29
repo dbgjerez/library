@@ -31,13 +31,13 @@ public class UserServiceImpl implements UserService {
 	private DozerBeanMapper mapper;
 
 	@Override
-	@Scheduled(cron = "0 0/1 * * * ?")
+	@Scheduled(cron = "0 0 2 1/1 * ?")
 	public void penalize() {
 		log.debug("Comienza el proceso de penalización de usuarios");
 	}
 
 	@Override
-	@Scheduled(cron = "0 0/1 * * * ?")
+	@Scheduled(cron = "0 0 3 1/1 * ?")
 	public void forgive() {
 		log.debug("Comienza el proceso de comprobación de sanciones de usuarios");
 	}
