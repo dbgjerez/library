@@ -70,4 +70,15 @@ public interface UserService {
 	 */
 	List<UserDTO> findAll(String name, String dni);
 
+	/**
+	 * Comprueba los usuarios a sancionar y los sanciona
+	 */
+	void penalize();
+
+	/**
+	 * Comprueba a los usuarios que han cumplido su sanciñón y los marca como
+	 * que pueden alquilar de nuevo
+	 */
+	void forgive();
+
 }
