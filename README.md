@@ -1,2 +1,3 @@
-# library
-Repositorio para gestionar una biblioteca. Formación de 2 semanas
+
+# Actualizar wrapper del proyecto 
+gradle wrapper --gradle-version 2.0
